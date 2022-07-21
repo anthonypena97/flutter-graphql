@@ -1,7 +1,9 @@
 const express = require('express');
 
 const app = express();
+
+const PORT = 4000;
  
-app.listen(4000, ()=>{
-  console.log("Listening for requests on port 4000");
+app.listen(PORT, ()=>{
+  console.log(`Listening for requests on port ${PORT}`);
 });
