@@ -136,6 +136,22 @@ const Mutation = new GraphQLObjectType({
         }
         return user;
       }
+    },
+    
+    createPost: {
+      type: PostType,
+      args: {
+        // id: {type: GraphQLID},
+        comment: {type: GraphQLString},
+        userId: {type: GraphQLString},
+      },
+      resolve(parent, args){
+        let post = {
+          comment: args.comment,
+          userId: args.userId,
+        }
+        return post;
+      }
     }
     
   }
