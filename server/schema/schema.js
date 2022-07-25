@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLBoolean} = require('graphql');
+const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLBoolean, GraphQLList} = require('graphql');
 var _ = require('lodash');
 
 // dummy data
@@ -34,7 +34,14 @@ const UserType = new GraphQLObjectType({
     id: {type: GraphQLString},
     name: {type: GraphQLString},
     age: {type: GraphQLInt},
-    profession: {type: GraphQLString}
+    profession: {type: GraphQLString},
+    
+    posts:{
+      type: new GraphQLList(PostType),
+      resolve(parent, args){
+        return _.filter(postData, {userId: parent.id});
+      }
+    }
   })
 });
 
