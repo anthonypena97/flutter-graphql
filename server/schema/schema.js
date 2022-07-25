@@ -10,7 +10,7 @@ var userData = [
   {id: '150', name: 'Georgina', age: 36, profession: 'Teacher'},
 ];
 
-var hobbyData = [
+var hobbiesData = [
   {id: '1', title: 'Programming', description: 'Using computers to make the world a better place', userId: '150',},
   {id: '2', title: 'Rowing', description: 'Sweat and feel better before eating donoughts', userId: '19',},
   {id: '3', title: 'Swimming', description: 'Get in the ware and learn to become the water', userId: '1',},
@@ -18,7 +18,7 @@ var hobbyData = [
   {id: '5', title: 'Programming', description: 'Wear hiking boots and explore the world', userId: '1',},
 ];
 
-var postData = [
+var postsData = [
   {id: '1', comment: 'Building a Mind', userId: '1'},
   {id: '2', comment: 'GraphQL is Amazing', userId: '1'},
   {id: '3', comment: 'How to Change the World', userId: '19'},
@@ -39,14 +39,14 @@ const UserType = new GraphQLObjectType({
     posts:{
       type: new GraphQLList(PostType),
       resolve(parent, args){
-        return _.filter(postData, {userId: parent.id});
+        return _.filter(postsData, {userId: parent.id});
       }
     },
     
     hobbies:{
       type: new GraphQLList(HobbyType),
       resolve(parent, args){
-        return _.filter(hobbyData, {userId: parent.id});
+        return _.filter(hobbiesData, {userId: parent.id});
       }
     }
   })
@@ -107,7 +107,7 @@ const RootQuery = new GraphQLObjectType({
     hobbies:{
       type: new GraphQLList(HobbyType),
       resolve(parent, args){
-        return hobbyData;
+        return hobbiesData;
       }
     },
     
@@ -115,14 +115,14 @@ const RootQuery = new GraphQLObjectType({
       type: HobbyType,
       args: {id: {type: GraphQLID}},
       resolve(parent, args){
-        return _.find(hobbyData, {id: args.id});
+        return _.find(hobbiesData, {id: args.id});
       }
     },
     
     posts:{
       type: new GraphQLList(PostType),
       resolve(parent, args){
-        return postData;
+        return postsData;
       }
     },
     
@@ -130,7 +130,7 @@ const RootQuery = new GraphQLObjectType({
       type: PostType,
       args: {id: {type: GraphQLID}},
       resolve(parent, args){
-        return _.find(postData, {id: args.id});
+        return _.find(postsData, {id: args.id});
       }
     },
     
