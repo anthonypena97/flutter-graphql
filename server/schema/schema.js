@@ -16,7 +16,12 @@ var hobbyData = [
   {id: '3', title: 'Swimming', description: 'Get in the ware and learn to become the water',},
   {id: '4', title: 'Fencing', description: 'A hobby for fency people',},
   {id: '5', title: 'Programming', description: 'Wear hiking boots and explore the world',},
-  
+];
+
+var postData = [
+  {id: '1', comment: 'Building a Mind',},
+  {id: '2', comment: 'GraphQL is Amazing',},
+  {id: '3', comment: 'How to Change the World',},
 ];
 
 // create types
@@ -41,6 +46,15 @@ const HobbyType = new GraphQLObjectType({
   })
 });
 
+const PostType = new GraphQLObjectType({
+  name: 'Post',
+  description: 'Post description',
+  fields: () => ({
+    id: {type: GraphQLID},
+    comment: {type: GraphQLString},
+  })
+});
+
 // RootQuery
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -54,8 +68,6 @@ const RootQuery = new GraphQLObjectType({
        
         return _.find(userData, {id: args.id});
         
-        // we resolve with data
-        // get and return data from a datasource
       }
     },
     
@@ -68,7 +80,19 @@ const RootQuery = new GraphQLObjectType({
         return _.find(hobbyData, {id: args.id});
         
       }
-    }
+    },
+    
+    post:{
+      type: PostType,
+      args: {id: {type: GraphQLID}},
+      
+      resolve(parent, args){
+        
+        return _.find(postData, {id: args.id});
+        
+      }
+    },
+    
   }
 });
 
