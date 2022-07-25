@@ -1,4 +1,5 @@
 const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, buildSchema} = require('graphql');
+var _ = require('lodash');
 
 // dummy data
 var userData = [
