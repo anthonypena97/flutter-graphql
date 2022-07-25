@@ -1,14 +1,29 @@
 const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
+const {buildSchema} = require('graphql');
 
-const schema = require('./schema/schema');
+// const schema = require('./schema/schema');
+
+const schema = buildSchema(`
+  type Query{
+    hello: String
+  }
+`);
+
+const root = {
+  hello: () => {
+    return 'Hello World!';
+  },
+};
 
 const app = express();
 
 // Middleware
 app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
   graphiql: true,
-  schema: schema
+  pretty: true,
 }));
 
 const PORT = 4000;
