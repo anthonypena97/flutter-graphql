@@ -26,7 +26,7 @@ var postData = [
   {id: '5', comment: 'How to Change the World', userId: '1'},
 ];
 
-// create types
+// TypeDefs
 const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'Documentation for user...',
@@ -88,36 +88,28 @@ const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   description: 'Description',
   fields: {
+    
     user:{
       type: UserType,
       args: {id: {type: GraphQLString}},
-      
       resolve(parent, args){
-       
         return _.find(userData, {id: args.id});
-        
       }
     },
     
     hobby:{
       type: HobbyType,
       args: {id: {type: GraphQLID}},
-      
       resolve(parent, args){
-        
         return _.find(hobbyData, {id: args.id});
-        
       }
     },
     
     post:{
       type: PostType,
       args: {id: {type: GraphQLID}},
-      
       resolve(parent, args){
-        
         return _.find(postData, {id: args.id});
-        
       }
     },
     
@@ -128,6 +120,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
+    
     createUser: {
       type: UserType,
       args: {
@@ -135,7 +128,6 @@ const Mutation = new GraphQLObjectType({
         age: {type: GraphQLInt},
         profession: {type: GraphQLString},
       },
-      
       resolve(parent, args){
         let user = {
           name: args.name,
@@ -145,6 +137,7 @@ const Mutation = new GraphQLObjectType({
         return user;
       }
     }
+    
   }
 });
 
