@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema} = require('graphql');
+const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, buildSchema} = require('graphql');
 
 // create types
 const UserType = new GraphQLObjectType({
@@ -21,6 +21,14 @@ const RootQuery = new GraphQLObjectType({
       args: {id: {type: GraphQLString}},
       
       resolve(parent, args){
+        let user = {
+          id: '345',
+          age: 34,
+          name: 'Paul'
+        }
+        
+        return user;
+        
         // we resolve with data
         // get and return data from a datasource
       }
@@ -28,6 +36,8 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
-module.export = new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: RootQuery
 })
+
+module.exports = schema;
