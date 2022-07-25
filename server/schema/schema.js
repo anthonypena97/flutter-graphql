@@ -89,6 +89,13 @@ const RootQuery = new GraphQLObjectType({
   description: 'Description',
   fields: {
     
+    users:{
+      type: new GraphQLList(UserType),
+      resolve(parent, args){
+        return userData;
+      }
+    },
+    
     user:{
       type: UserType,
       args: {id: {type: GraphQLString}},
