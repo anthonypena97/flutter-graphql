@@ -152,6 +152,23 @@ const Mutation = new GraphQLObjectType({
         }
         return post;
       }
+    },
+    
+    createHobby: {
+      type: HobbyType,
+      args: {
+        // id: {type: GraphQLID},
+        title: {type: GraphQLString},
+        description: {type: GraphQLString},
+        userId: {type: GraphQLID}
+      },
+      resolve(parent, args){
+        let hobby = {
+          comment: args.comment,
+          userId: args.userId,
+        }
+        return hobby;
+      }
     }
     
   }
