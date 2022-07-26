@@ -1,6 +1,10 @@
 const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLBoolean, GraphQLList} = require('graphql');
 var _ = require('lodash');
 
+const User = require('../models/user');
+const Hobby = require('../models/hobby');
+const Post = require('../models/post');
+
 // dummy data
 var userData = [
   {id: '1', name: 'Bond', age: 36, profession: 'Programmer',},
