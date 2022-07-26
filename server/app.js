@@ -16,10 +16,13 @@ app.use('/graphql', graphqlHTTP({
   pretty: true,
 }));
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@graphqlcluster.6k90h.mongodb.net/?retryWrites=true&w=majority`)
- 
-app.listen(PORT, ()=>{
-  console.log(`Listening for requests on port ${PORT}`);
-});
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@graphqlcluster.6k90h.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(() =>{
+  app.listen(PORT, ()=>{
+    console.log(`Listening for requests on port ${PORT}`);
+  });
+  
+})
+.catch((e)=>{console.log(`Error ::: ${e}`)})
