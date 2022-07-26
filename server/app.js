@@ -1,5 +1,4 @@
-const dotenv = require('dotenv')
-console.log(process.env) 
+require('dotenv').config()
 
 const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
@@ -19,9 +18,7 @@ app.use('/graphql', graphqlHTTP({
 
 const PORT = 4000;
 
-// console.log(process.env.MONGO_USERNAME)
-
-mongoose.connect(`mongodb+srv://anthonypena97:<password>@graphqlcluster.6k90h.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@graphqlcluster.6k90h.mongodb.net/?retryWrites=true&w=majority`)
  
 app.listen(PORT, ()=>{
   console.log(`Listening for requests on port ${PORT}`);
