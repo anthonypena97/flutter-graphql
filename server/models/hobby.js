@@ -5,7 +5,7 @@ const hobbySchema = new MSchema({
   title: String,
   description: Number,
   profession: String,
-  userId: Sting
+  userId: String
 });
 
 module.exports = mongoose.model('Hobby', hobbySchema);
