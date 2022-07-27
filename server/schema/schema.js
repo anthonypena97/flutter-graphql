@@ -188,11 +188,12 @@ const Mutation = new GraphQLObjectType({
         userId: {type: GraphQLID}
       },
       resolve(parent, args){
-        let hobby = {
-          comment: args.comment,
+        let hobby = Hobby({
+          title: args.title,
+          description: args.description,
           userId: args.userId,
-        }
-        return hobby;
+        });
+        return hobby.save();
       }
     }
     

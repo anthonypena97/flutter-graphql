@@ -3,8 +3,7 @@ const MSchema = mongoose.Schema
 
 const hobbySchema = new MSchema({
   title: String,
-  description: Number,
-  profession: String,
+  description: String,
   userId: String
 });
 
