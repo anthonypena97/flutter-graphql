@@ -238,7 +238,28 @@ const Mutation = new GraphQLObjectType({
         });
         return hobby.save();
       }
-    }
+    },
+    
+    UpdateHobby:{
+      type: HobbyType,
+      args:{
+        id: {type: new GraphQLNonNull(GraphQLString)},
+        title: {type: new GraphQLNonNull(GraphQLString)},
+        description: {type: new GraphQLNonNull(GraphQLString)},
+      },
+      resolve(parent, args){
+        return (updatedHobby = Hobby.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              title: args.comment,
+              description: args.description
+            }
+          },
+          {new: true}
+        ))
+      }
+    },
     
   }
 });
