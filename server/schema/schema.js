@@ -43,14 +43,14 @@ const UserType = new GraphQLObjectType({
     posts:{
       type: new GraphQLList(PostType),
       resolve(parent, args){
-        return _.filter(postsData, {userId: parent.id});
+        return Post.find({userId: parent.id});
       }
     },
     
     hobbies:{
       type: new GraphQLList(HobbyType),
       resolve(parent, args){
-        return _.filter(hobbiesData, {userId: parent.id});
+        return Hobby.find({userId: parent.id});
       }
     }
   })
@@ -104,7 +104,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: {id: {type: GraphQLString}},
       resolve(parent, args){
-        return _.find(userData, {id: args.id});
+        return User.findById(args.id)
       }
     },
     
