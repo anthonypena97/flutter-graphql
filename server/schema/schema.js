@@ -203,6 +203,25 @@ const Mutation = new GraphQLObjectType({
       }
     },
     
+    UpdatePost:{
+      type: PostType,
+      args:{
+        id: {type: new GraphQLNonNull(GraphQLString)},
+        comment: {type: new GraphQLNonNull(GraphQLString)},
+      },
+      resolve(parent, args){
+        return (updatedPost = Post.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              comment: args.comment
+            }
+          },
+          {new: true}
+        ))
+      }
+    },
+    
     createHobby: {
       type: HobbyType,
       args: {
