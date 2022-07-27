@@ -187,6 +187,20 @@ const Mutation = new GraphQLObjectType({
       }
     },
     
+    RemoveUser:{
+      type: UserType,
+      args: {
+        id: {type: new GraphQLNonNull(GraphQLString)},
+      },
+      resolve(parent,args){
+        let removedUser = User.findByIdAndRemove(args.id).exec();
+        if(!removedUser){
+          throw new "Error" ()
+        }
+        return removedUser;
+      }
+    },
+    
     createPost: {
       type: PostType,
       args: {
