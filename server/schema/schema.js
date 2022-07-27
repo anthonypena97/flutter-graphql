@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLBoolean, GraphQLList} = require('graphql');
+const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLBoolean, GraphQLList, GraphQLNonNull} = require('graphql');
 var _ = require('lodash');
 
 const User = require('../models/user');
@@ -149,8 +149,8 @@ const Mutation = new GraphQLObjectType({
     createUser: {
       type: UserType,
       args: {
-        name: {type: GraphQLString},
-        age: {type: GraphQLInt},
+        name: {type: new GraphQLNonNull(GraphQLString)},
+        age: {type: new GraphQLNonNull(GraphQLInt)},
         profession: {type: GraphQLString},
       },
       resolve(parent, args){
@@ -163,12 +163,36 @@ const Mutation = new GraphQLObjectType({
       }
     },
     
+    // Update User
+    UpdateUser:{
+      type: UserType,
+      args: {
+        id: {type: new GraphQLNonNull(GraphQLString)},
+        name: {type: new GraphQLNonNull(GraphQLString)},
+        age: {type: new GraphQLNonNull(GraphQLInt)},
+        profession: {type: GraphQLString},
+      },
+      resolve(parent, args){
+        return updateUser = User.findByIdAndUpdate(
+          args.id,
+          {
+            $set:{
+              name: args.name,
+              age: args.age,
+              profession: args.profession,
+            },
+          },
+          {new: true},
+        );
+      }
+    },
+    
     createPost: {
       type: PostType,
       args: {
         // id: {type: GraphQLID},
-        comment: {type: GraphQLString},
-        userId: {type: GraphQLID},
+        comment: {type: new GraphQLNonNull(GraphQLString)},
+        userId: {type: new GraphQLNonNull(GraphQLID)},
       },
       resolve(parent, args){
         let post = Post({
@@ -183,9 +207,9 @@ const Mutation = new GraphQLObjectType({
       type: HobbyType,
       args: {
         // id: {type: GraphQLID},
-        title: {type: GraphQLString},
-        description: {type: GraphQLString},
-        userId: {type: GraphQLID}
+        title: {type: new GraphQLNonNull(GraphQLString)},
+        description: {type:  new GraphQLNonNull(GraphQLString)},
+        userId: {type: new GraphQLNonNull(GraphQLID)}
       },
       resolve(parent, args){
         let hobby = Hobby({
