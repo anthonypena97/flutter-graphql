@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
