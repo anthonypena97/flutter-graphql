@@ -2,10 +2,10 @@
   "name": "flutter-graphql",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": " cd server && npm run start"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
