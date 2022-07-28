@@ -1,0 +1,21 @@
+{
+  "name": "flutter-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd server && npm i",
+    "start": "cd server && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonypena97/flutter-graphql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anthonypena97/flutter-graphql/issues"
+  },
+  "homepage": "https://github.com/anthonypena97/flutter-graphql#readme"
+}
