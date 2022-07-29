@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graphql/views/users_page.dart';
+import 'add_user_page.dart';
 
 class HomeScreen extends StatefulWidget{
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,20 +14,30 @@ class _HomeScreenState extends State<HomeScreen>{
   
   @override
   Widget build(BuildContext context){
+    Widget content = const UsersPage();
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),
+        title: const Text(
+          "User's and Hobbies",
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[],
-        ),
+        child: content,
       ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final route = MaterialPageRoute(builder: (context) => const AddUserPage());
+          await Navigator.push(context, route);
+        },
+        backgroundColor: Colors.lightGreenAccent,
+        child: const Icon(Icons.group_add),
       ), 
     );
   }
