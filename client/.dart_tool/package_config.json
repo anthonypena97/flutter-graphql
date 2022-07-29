@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "args",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "async",
       "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2",
       "packageUri": "lib/",
@@ -38,10 +44,58 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "connectivity_plus",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_plus_linux",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_linux-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_plus_macos",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_macos-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_plus_platform_interface",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_platform_interface-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_plus_web",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_web-1.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_plus_windows",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_windows-1.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "dbus",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/dbus-0.7.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "fake_async",
@@ -50,10 +104,28 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "ffi",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "file",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_hooks",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hooks-0.18.5+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_lints",
@@ -66,6 +138,90 @@
       "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "gql",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql-0.13.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "gql_dedupe_link",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql_dedupe_link-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "gql_error_link",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql_error_link-0.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "gql_exec",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql_exec-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "gql_http_link",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql_http_link-0.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "gql_link",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql_link-0.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "gql_transform_link",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/gql_transform_link-0.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "graphql",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/graphql-5.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "graphql_flutter",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/graphql_flutter-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "hive",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/hive-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "lints",
@@ -92,8 +248,92 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nm",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/nm-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "normalize",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/normalize-0.6.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "path_provider_android",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.17",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "path_provider_ios",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "path_provider_linux",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_macos",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/platform-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "process",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -140,10 +380,46 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "typed_data",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "uuid",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/uuid-3.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "web_socket_channel",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "win32",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "xdg_directories",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "xml",
+      "rootUri": "file:///Users/anthonypena/Desktop/Splice/Tech/flutter/.pub-cache/hosted/pub.dartlang.org/xml-6.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_graphql",
@@ -152,7 +428,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-07-29T19:25:54.206763Z",
+  "generated": "2022-07-29T19:54:44.507926Z",
   "generator": "pub",
   "generatorVersion": "2.17.3"
 }
