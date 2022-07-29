@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graphql/views/home_screen.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 void  main() async {
@@ -24,51 +25,29 @@ class MyApp extends StatelessWidget {
   final ValueNotifier<GraphQLClient> client;
 
   const MyApp({super.key, required this.client});
-
+  
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context).textTheme;
     return GraphQLProvider(
       client: client,
       child: CacheProvider(
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.blueGrey,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            textTheme: theme,
+            appBarTheme: AppBarTheme(
+              iconTheme: const IconThemeData(color: Colors.black87),
+              // ignore: deprecated_member_use
+              textTheme: theme,
+            )
           ),
           home: const HomeScreen()
         ),
       ),
-    );
-  }
-}
-
-class HomeScreen extends StatefulWidget{
-  const HomeScreen({Key? key}) : super(key: key);
-  
-  @override
-  // ignore: library_private_types_in_public_api
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>{
-  
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[],
-        ),
-      ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), 
     );
   }
 }
