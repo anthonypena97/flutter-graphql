@@ -37,8 +37,15 @@ class _UsersPageState extends State<UsersPage> {
                     mainAxisSize: MainAxisSize.min,
                     children:[
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text('Hello'),
+                          Text(
+                            'Hello',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ],
