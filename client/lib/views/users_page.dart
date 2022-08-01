@@ -3,7 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
-
+  
   @override
   State<UsersPage> createState() => _UsersPageState();
 }
@@ -14,7 +14,6 @@ class _UsersPageState extends State<UsersPage> {
   query{
     users{
       name
-      id
       profession
       age
     }
@@ -32,8 +31,8 @@ class _UsersPageState extends State<UsersPage> {
         users = result.data!["users"];
         
         return (users.isNotEmpty) ? ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (context, index) {
+          itemCount: users.length,
+          itemBuilder: (context, index) {
           final user = users[index];
           
           return Stack(
@@ -71,6 +70,26 @@ class _UsersPageState extends State<UsersPage> {
                             ),
                           ],
                         ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                              child: Text(
+                                'Occupation: ${user["profession"] ?? 'N/A'}'
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                              child: Text(
+                                'Age: ${user["age"] ?? 'N/A'}'
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -82,6 +101,7 @@ class _UsersPageState extends State<UsersPage> {
       ) : const Center(
           child: Text("No users found"),
         );
+        
       },
     );
   }

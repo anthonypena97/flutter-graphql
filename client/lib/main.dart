@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       child: CacheProvider(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Flutter GraphQL Demo',
           theme: ThemeData(
             primarySwatch: Colors.blueGrey,
             visualDensity: VisualDensity.adaptivePlatformDensity,
