@@ -31,7 +31,7 @@ class _UsersPageState extends State<UsersPage> {
         }
         users = result.data!["users"];
         
-        return ListView.builder(
+        return (users.isNotEmpty) ? ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
           final user = users[index];
@@ -79,7 +79,9 @@ class _UsersPageState extends State<UsersPage> {
             ],
           );
         },
-      );
+      ) : const Center(
+          child: Text("No users found"),
+        );
       },
     );
   }
