@@ -10,6 +10,11 @@ class AddUserPage extends StatefulWidget {
 
 class _AddUserPageState extends State<AddUserPage> {
   final _formKey = GlobalKey<FormState>();
+  
+  final _nameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _professionController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +55,80 @@ class _AddUserPageState extends State<AddUserPage> {
                 builder: (runMutation, result) {
                   return Form(
                     key: _formKey,
-                    child: Column(),
+                    child: Column(
+                      children:[
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _nameController,
+                          decoration: const InputDecoration(
+                            labelText: "Name",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          validator: (value){
+                              if(value!.isEmpty){
+                                return "Name cannot be empty";
+                              }else{
+                                return null;
+                              }
+                            },
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _professionController,
+                          decoration: const InputDecoration(
+                            labelText: "Profession",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          validator: (value){
+                              if(value!.isEmpty){
+                                return "Profession cannot be empty";
+                              }else{
+                                return null;
+                              }
+                            },
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _ageController,
+                          decoration: const InputDecoration(
+                            labelText: "Age",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          validator: (value){
+                              if(value!.isEmpty){
+                                return "Age cannot be empty";
+                              }else{
+                                return null;
+                              }
+                            },
+                          keyboardType: TextInputType.number,
+                        ),
+                        const SizedBox(height: 12.0),
+                        TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
+                          ),
+                          onPressed: (){
+                            
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 36.0, vertical: 12.0 ),
+                            child: Text('Save'),
+                            ),
+                          ),
+                      ],
+                    ),
                   );
                 },
               ),
