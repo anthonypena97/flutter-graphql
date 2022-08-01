@@ -24,3 +24,4 @@ app.*.map.json
 /android/app/release
 /android/app/local.properties
 /android/local.properties
+
