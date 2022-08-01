@@ -68,6 +68,31 @@ class _UsersPageState extends State<UsersPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            Row(
+                              children: [
+                                InkWell(
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.greenAccent,
+                                  ),
+                                  onTap: () async {
+                                      debugPrint('edit');
+                                  },
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: InkWell(
+                                    child: const Icon(
+                                      Icons.delete_forever,
+                                      color: Colors.redAccent,
+                                    ),
+                                    onTap: () async {
+                                        debugPrint('delete');
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         Row(
