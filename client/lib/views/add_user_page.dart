@@ -39,7 +39,7 @@ class _AddUserPageState extends State<AddUserPage> {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                  offset: Offset(0, 10),
+                  offset: const Offset(0, 10),
                   color: Colors.grey.shade300,
                   blurRadius: 30),
             ],
@@ -120,7 +120,13 @@ class _AddUserPageState extends State<AddUserPage> {
                             backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
                           ),
                           onPressed: (){
-                            
+                            if(_formKey.currentState!.validate()){
+                              runMutation({
+                                "name": _nameController.text.trim(),
+                                "profession": _professionController.text.trim(),
+                                "age": int.parse(_ageController.text.trim())
+                              });
+                            }
                           },
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 36.0, vertical: 12.0 ),
