@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)"
-options: "9a1a92567da5ba281853eeb8aa848932366c22d4c906cd6a3183548b7eafb970"
-build_start_time: [1659122830, 109890937]
-build_end_time: [1659122839, 377252101]
-inputs:
-  "/Users/anthonypena/Desktop/Splice/work/graphql/flutter-graphql/client/macos/Flutter/GeneratedPluginRegistrant.swift": [1659122798, 514197826]
-  "/Users/anthonypena/Desktop/Splice/work/graphql/flutter-graphql/client/macos/Runner/AppDelegate.swift": [1654869226, 0]
-  "/Users/anthonypena/Desktop/Splice/work/graphql/flutter-graphql/client/macos/Runner/MainFlutterWindow.swift": [1654869226, 0]
