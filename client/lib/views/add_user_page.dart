@@ -58,7 +58,7 @@ class _AddUserPageState extends State<AddUserPage> {
                   onCompleted: (data) {
                     debugPrint(data.toString());
                     setState(() {
-                      _isSaving = true;
+                      _isSaving = false;
                     });
                   },
                 ),
