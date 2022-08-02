@@ -10,13 +10,27 @@ class AddUserPage extends StatefulWidget {
 
 class _AddUserPageState extends State<AddUserPage> {
   final _formKey = GlobalKey<FormState>();
+  final _hobbyFormKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
   final _professionController = TextEditingController();
+  
+  final _hobbyTitleController = TextEditingController();
+  final _hobbyDescriptionController = TextEditingController();
 
   bool _isSaving = false;
-
+  bool _isSavingHobby = false;
+  bool _visible = false;
+  
+  String currUserId = '';
+  
+  void _toggle(){
+    setState((){
+      _visible = !_visible;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +62,8 @@ class _AddUserPageState extends State<AddUserPage> {
           ),
           child: Column(
             children: [
+              
+              // Add a user ---------------------------------------------------------------------------------------
               Mutation(
                 options: MutationOptions(
                   document: gql(insertUser()),
@@ -59,6 +75,7 @@ class _AddUserPageState extends State<AddUserPage> {
                     debugPrint(data.toString());
                     setState(() {
                       _isSaving = false;
+                      currUserId = data!['createUser']['id'];
                     });
                   },
                 ),
@@ -140,15 +157,14 @@ class _AddUserPageState extends State<AddUserPage> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
+                                    _toggle();
                                     setState(() {
                                       _isSaving = true;
                                     });
                                     runMutation({
-                                      "name": _nameController.text.trim(),
-                                      "age":
-                                          int.parse(_ageController.text.trim()),
-                                      "profession":
-                                          _professionController.text.trim(),
+                                      'name': _nameController.text.trim(),
+                                      'age': int.parse(_ageController.text.trim()),
+                                      'profession': _professionController.text.trim(),
                                     });
                                   }
                                 },
@@ -163,6 +179,106 @@ class _AddUserPageState extends State<AddUserPage> {
                   );
                 },
               ),
+              
+              // Add a Hobby ----------------------------------------------------------------------------------------------------
+              Visibility(
+                visible: _visible,
+                child: Mutation(
+                  options: MutationOptions(
+                    document: gql(insertHobby()),
+                    fetchPolicy: FetchPolicy.noCache,
+                    onError: (error) {
+                      debugPrint(error.toString());
+                    },
+                    onCompleted: (data) {
+                      debugPrint(data.toString());
+                      setState(() {
+                        _isSavingHobby = false;
+                      });
+                    },
+                    ),
+                  builder: (runMutation, result) {
+                    return Form(
+                    key: _hobbyFormKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _hobbyTitleController,
+                          decoration: const InputDecoration(
+                            labelText: "Hobby Title",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Hobby Title cannot be empty";
+                            } else {
+                              return null;
+                            }
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _hobbyDescriptionController,
+                          decoration: const InputDecoration(
+                            labelText: "Description",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Profession cannot be empty";
+                            } else {
+                              return null;
+                            }
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(height: 12.0),
+                        _isSavingHobby
+                            ? const SizedBox(
+                                height: 20.0,
+                                width: 20.0,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                ),
+                              )
+                            : TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.greenAccent),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                        _isSavingHobby = true;
+                                      });
+                                    runMutation({
+                                      'title': _hobbyTitleController.text.trim(),
+                                      'description': _hobbyDescriptionController.text.trim(),
+                                      'userId': currUserId,
+                                    });
+                                  }
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 36.0, vertical: 12.0),
+                                  child: Text('Save'),
+                                ),
+                              ),
+                      ],
+                    ),
+                  );
+                  },
+                ),
+              ),
+              
             ],
           ),
         ),
@@ -173,11 +289,22 @@ class _AddUserPageState extends State<AddUserPage> {
 
 String insertUser() {
   return """
-  mutation CreateUser(\$name: String!, \$age: Int!, \$profession: String!){
+  mutation createUser(\$name: String!, \$age: Int!, \$profession: String!){
     createUser(name: \$name, age: \$age, profession: \$profession){
       id
       name
     }
 }
+  """;
+}
+
+String insertHobby() {
+  return """
+  mutation createHobby(\$title: String!, \$description: String!, \$userId: ID!){
+    createHobby(title: \$title, description: \$description, userId: \$userId ){
+      id
+      title
+    }
+  }
   """;
 }
