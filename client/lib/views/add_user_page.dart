@@ -10,13 +10,13 @@ class AddUserPage extends StatefulWidget {
 
 class _AddUserPageState extends State<AddUserPage> {
   final _formKey = GlobalKey<FormState>();
-  
+
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
   final _professionController = TextEditingController();
-  
+
   bool _isSaving = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,18 +52,21 @@ class _AddUserPageState extends State<AddUserPage> {
                 options: MutationOptions(
                   document: gql(insertUser()),
                   fetchPolicy: FetchPolicy.noCache,
-                  onError:(error) {
+                  onError: (error) {
                     debugPrint(error.toString());
                   },
                   onCompleted: (data) {
                     debugPrint(data.toString());
+                    setState(() {
+                      _isSaving = true;
+                    });
                   },
                 ),
                 builder: (runMutation, result) {
                   return Form(
                     key: _formKey,
                     child: Column(
-                      children:[
+                      children: [
                         const SizedBox(height: 12.0),
                         TextFormField(
                           controller: _nameController,
@@ -74,13 +77,13 @@ class _AddUserPageState extends State<AddUserPage> {
                               borderSide: BorderSide(),
                             ),
                           ),
-                          validator: (value){
-                              if(value!.isEmpty){
-                                return "Name cannot be empty";
-                              }else{
-                                return null;
-                              }
-                            },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Name cannot be empty";
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.text,
                         ),
                         const SizedBox(height: 12.0),
@@ -93,13 +96,13 @@ class _AddUserPageState extends State<AddUserPage> {
                               borderSide: BorderSide(),
                             ),
                           ),
-                          validator: (value){
-                              if(value!.isEmpty){
-                                return "Profession cannot be empty";
-                              }else{
-                                return null;
-                              }
-                            },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Profession cannot be empty";
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.text,
                         ),
                         const SizedBox(height: 12.0),
@@ -112,42 +115,49 @@ class _AddUserPageState extends State<AddUserPage> {
                               borderSide: BorderSide(),
                             ),
                           ),
-                          validator: (value){
-                              if(value!.isEmpty){
-                                return "Age cannot be empty";
-                              }else{
-                                return null;
-                              }
-                            },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Age cannot be empty";
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.number,
                         ),
                         const SizedBox(height: 12.0),
-                        _isSaving ? const SizedBox(
-                          height: 20.0, 
-                          width: 20.0, 
-                          child: CircularProgressIndicator(strokeWidth: 3,),
-                          )
-                        : TextButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
-                          ),
-                          onPressed: (){
-                            if(_formKey.currentState!.validate()){
-                              setState((){
-                                _isSaving = true;
-                              });
-                              runMutation({
-                                "name": _nameController.text.trim(),
-                                "age": int.parse(_ageController.text.trim()),
-                                "profession": _professionController.text.trim(),
-                              });
-                            }
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 36.0, vertical: 12.0 ),
-                            child: Text('Save'),
-                            ),
-                          ),
+                        _isSaving
+                            ? const SizedBox(
+                                height: 20.0,
+                                width: 20.0,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                ),
+                              )
+                            : TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.greenAccent),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                      _isSaving = true;
+                                    });
+                                    runMutation({
+                                      "name": _nameController.text.trim(),
+                                      "age":
+                                          int.parse(_ageController.text.trim()),
+                                      "profession":
+                                          _professionController.text.trim(),
+                                    });
+                                  }
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 36.0, vertical: 12.0),
+                                  child: Text('Save'),
+                                ),
+                              ),
                       ],
                     ),
                   );
