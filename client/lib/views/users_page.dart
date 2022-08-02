@@ -23,7 +23,7 @@ class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
     return Query(
-      options: QueryOptions(document: gql(_query)),
+      options: QueryOptions(document: gql(_query),fetchPolicy: FetchPolicy.noCache),
       builder: (result, {fetchMore, refetch}) {
         if(result.isLoading){
           return const CircularProgressIndicator();
