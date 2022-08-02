@@ -50,7 +50,12 @@ class _AddUserPageState extends State<AddUserPage> {
                 options: MutationOptions(
                   document: gql(insertUser()),
                   fetchPolicy: FetchPolicy.noCache,
-                  onCompleted: (data) {},
+                  onError:(error) {
+                    debugPrint(error.toString());
+                  },
+                  onCompleted: (data) {
+                    debugPrint(data.toString());
+                  },
                 ),
                 builder: (runMutation, result) {
                   return Form(
@@ -123,8 +128,8 @@ class _AddUserPageState extends State<AddUserPage> {
                             if(_formKey.currentState!.validate()){
                               runMutation({
                                 "name": _nameController.text.trim(),
+                                "age": int.parse(_ageController.text.trim()),
                                 "profession": _professionController.text.trim(),
-                                "age": int.parse(_ageController.text.trim())
                               });
                             }
                           },
@@ -147,5 +152,12 @@ class _AddUserPageState extends State<AddUserPage> {
 }
 
 String insertUser() {
-  return "";
+  return """
+  mutation CreateUser(\$name: String!, \$age: Int!, \$profession: String!){
+    CreateUser(name: \$name, age: \$age, profession: \$profession){
+      id
+      name
+    }
+}
+  """;
 }
