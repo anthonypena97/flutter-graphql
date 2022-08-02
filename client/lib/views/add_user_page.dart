@@ -15,6 +15,8 @@ class _AddUserPageState extends State<AddUserPage> {
   final _ageController = TextEditingController();
   final _professionController = TextEditingController();
   
+  bool _isSaving = false;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,12 +122,20 @@ class _AddUserPageState extends State<AddUserPage> {
                           keyboardType: TextInputType.number,
                         ),
                         const SizedBox(height: 12.0),
-                        TextButton(
+                        _isSaving ? const SizedBox(
+                          height: 20.0, 
+                          width: 20.0, 
+                          child: CircularProgressIndicator(strokeWidth: 3,),
+                          )
+                        : TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
                           ),
                           onPressed: (){
                             if(_formKey.currentState!.validate()){
+                              setState((){
+                                _isSaving = true;
+                              });
                               runMutation({
                                 "name": _nameController.text.trim(),
                                 "age": int.parse(_ageController.text.trim()),
@@ -154,7 +164,7 @@ class _AddUserPageState extends State<AddUserPage> {
 String insertUser() {
   return """
   mutation CreateUser(\$name: String!, \$age: Int!, \$profession: String!){
-    CreateUser(name: \$name, age: \$age, profession: \$profession){
+    createUser(name: \$name, age: \$age, profession: \$profession){
       id
       name
     }
