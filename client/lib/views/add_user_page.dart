@@ -25,7 +25,7 @@ class _AddUserPageState extends State<AddUserPage> {
   
   String currUserId = '';
   
-  void _toggle(){
+  void _toggleHobby(){
     setState((){
       _visible = !_visible;
     });
@@ -157,7 +157,7 @@ class _AddUserPageState extends State<AddUserPage> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    _toggle();
+                                    _toggleHobby();
                                     setState(() {
                                       _isSaving = true;
                                     });
@@ -180,7 +180,7 @@ class _AddUserPageState extends State<AddUserPage> {
                 },
               ),
               
-              // Add a Hobby ----------------------------------------------------------------------------------------------------
+              // Add a Hobby -------------------------------------------------------------------------------------------------
               Visibility(
                 visible: _visible,
                 child: Mutation(
