@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'users_page.dart';
 
 class AddUserPage extends StatefulWidget {
   const AddUserPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class AddUserPage extends StatefulWidget {
 class _AddUserPageState extends State<AddUserPage> {
   final _formKey = GlobalKey<FormState>();
   final _hobbyFormKey = GlobalKey<FormState>();
+  final _postFormKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
@@ -18,16 +20,26 @@ class _AddUserPageState extends State<AddUserPage> {
   
   final _hobbyTitleController = TextEditingController();
   final _hobbyDescriptionController = TextEditingController();
+  
+  final _postCommentController = TextEditingController();
 
   bool _isSaving = false;
   bool _isSavingHobby = false;
-  bool _visible = false;
+  bool _isSavingPost = false;
+  bool _hobbyVisible = false;
+  bool _postVisible = false;
   
   String currUserId = '';
   
   void _toggleHobby(){
     setState((){
-      _visible = !_visible;
+      _hobbyVisible = !_hobbyVisible;
+    });
+  }
+  
+  void _togglePost(){
+    setState((){
+      _postVisible = !_postVisible;
     });
   }
   
@@ -73,6 +85,7 @@ class _AddUserPageState extends State<AddUserPage> {
                   },
                   onCompleted: (data) {
                     debugPrint(data.toString());
+                    _toggleHobby();
                     setState(() {
                       _isSaving = false;
                       currUserId = data!['createUser']['id'];
@@ -157,7 +170,6 @@ class _AddUserPageState extends State<AddUserPage> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    _toggleHobby();
                                     setState(() {
                                       _isSaving = true;
                                     });
@@ -182,7 +194,7 @@ class _AddUserPageState extends State<AddUserPage> {
               
               // Add a Hobby -------------------------------------------------------------------------------------------------
               Visibility(
-                visible: _visible,
+                visible: _hobbyVisible,
                 child: Mutation(
                   options: MutationOptions(
                     document: gql(insertHobby()),
@@ -192,6 +204,7 @@ class _AddUserPageState extends State<AddUserPage> {
                     },
                     onCompleted: (data) {
                       debugPrint(data.toString());
+                      _togglePost();
                       setState(() {
                         _isSavingHobby = false;
                       });
@@ -279,6 +292,98 @@ class _AddUserPageState extends State<AddUserPage> {
                 ),
               ),
               
+              // Add a Post -------------------------------------------------------------------------------------------------
+              Visibility(
+                visible: _postVisible,
+                child: Mutation(
+                  options: MutationOptions(
+                    document: gql(insertPost()),
+                    fetchPolicy: FetchPolicy.noCache,
+                    onError: (error) {
+                      debugPrint(error.toString());
+                    },
+                    onCompleted: (data) {
+                      debugPrint(data.toString());
+                      setState(() {
+                        _isSavingPost = false;
+                      });
+                    },
+                    ),
+                  builder: (runMutation, result) {
+                    return Form(
+                    key: _postFormKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _postCommentController,
+                          decoration: const InputDecoration(
+                            labelText: "Post Comment",
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Post Comment cannot be empty";
+                            } else {
+                              return null;
+                            }
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(height: 12.0),
+                        _isSavingPost
+                            ? const SizedBox(
+                                height: 20.0,
+                                width: 20.0,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                ),
+                              )
+                            : TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                        _isSavingPost = true;
+                                      });
+                                    runMutation({
+                                      'comment': _postCommentController.text.trim(),
+                                      'userId': currUserId,
+                                    });
+                                  }
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 36.0, vertical: 12.0),
+                                  child: Text('Save'),
+                                ),
+                              ),
+                      ],
+                    ),
+                  );
+                  },
+                ),
+              ),
+              const SizedBox(height: 15.0),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red[100]),
+                ),
+                onPressed: () {
+                  // final route = MaterialPageRoute(builder: (context) => const UsersPage());
+                  Navigator.pop(context);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 36.0, vertical: 12.0,),
+                  child: Text('Done'),
+                  ),
+              ),
+              
             ],
           ),
         ),
@@ -304,6 +409,17 @@ String insertHobby() {
     createHobby(title: \$title, description: \$description, userId: \$userId ){
       id
       title
+    }
+  }
+  """;
+}
+
+String insertPost() {
+  return """
+  mutation createPost(\$comment: String!, \$userId: ID!){
+    createPost(comment: \$comment, userId: \$userId){
+      id
+      comment
     }
   }
   """;
