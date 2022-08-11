@@ -267,7 +267,7 @@ class _AddUserPageState extends State<AddUserPage> {
                                       Colors.greenAccent),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (_hobbyFormKey.currentState!.validate()) {
                                     setState(() {
                                         _isSavingHobby = true;
                                       });
@@ -346,7 +346,7 @@ class _AddUserPageState extends State<AddUserPage> {
                                   backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (_postFormKey.currentState!.validate()) {
                                     setState(() {
                                         _isSavingPost = true;
                                       });
