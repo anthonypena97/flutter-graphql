@@ -14,6 +14,7 @@ class _UsersPageState extends State<UsersPage> {
   final String _query = """
   query{
     users{
+      id
       name
       profession
       age
