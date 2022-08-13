@@ -29,6 +29,14 @@ class _UpdateUserState extends State<UpdateUser> {
    final _formKey = GlobalKey<FormState>();
    
    bool _isSaving = false;
+   
+   @override
+    void initState(){
+      super.initState();
+    _nameController.text = widget.name;
+    _professionController.text = widget.profession;
+    _ageController.text = widget.age.toString();
+   }
   
   
   @override
