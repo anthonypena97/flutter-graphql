@@ -63,6 +63,7 @@ const HobbyType = new GraphQLObjectType({
     id: {type: GraphQLID},
     title: {type: GraphQLString},
     description: {type: GraphQLString},
+    userId: { type: GraphQLNonNull(GraphQLString)},
     user: {
       type: UserType,
       resolve(parent, args){
@@ -78,6 +79,7 @@ const PostType = new GraphQLObjectType({
   fields: () => ({
     id: {type: GraphQLID},
     comment: {type: GraphQLString},
+    userId: { type: GraphQLNonNull(GraphQLString)},
     user: {
       type: UserType,
       resolve(parent, args){

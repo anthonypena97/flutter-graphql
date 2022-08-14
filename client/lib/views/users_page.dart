@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_graphql/views/update_user_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import 'home_screen.dart';
-
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
   
@@ -20,6 +18,20 @@ class _UsersPageState extends State<UsersPage> {
       name
       profession
       age
+      posts{
+        id
+        comment
+        user{
+          id
+        }
+      }
+      hobbies{
+        id
+        title
+        user{
+          id
+        }
+      }
     }
   }
   """;
@@ -108,13 +120,16 @@ class _UsersPageState extends State<UsersPage> {
                                         color: Colors.redAccent,
                                        ),
                                         onTap: () async {
-                                          runMutation({"id": user["id"]});
-                                          Navigator.pushAndRemoveUntil(
-                                            context, 
-                                            MaterialPageRoute(builder: (context){
-                                              return const HomeScreen();
-                                            },
-                                            ), (route) => false);
+                                          debugPrint("User:::${user.toString()}");
+                                          
+                                        //   runMutation({"id": user["id"]});
+                                        //   Navigator.pushAndRemoveUntil(
+                                        //     context, 
+                                        //     MaterialPageRoute(builder: (context){
+                                        //       return const HomeScreen();
+                                        //     },
+                                        //    ), (route) => false,
+                                        //  );
                                         },
                                        );
                                       }
