@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_graphql/views/update_user_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import 'home_screen.dart';
+
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
   
@@ -120,16 +122,14 @@ class _UsersPageState extends State<UsersPage> {
                                         color: Colors.redAccent,
                                        ),
                                         onTap: () async {
-                                          debugPrint("User:::${user.toString()}");
-                                          
-                                        //   runMutation({"id": user["id"]});
-                                        //   Navigator.pushAndRemoveUntil(
-                                        //     context, 
-                                        //     MaterialPageRoute(builder: (context){
-                                        //       return const HomeScreen();
-                                        //     },
-                                        //    ), (route) => false,
-                                        //  );
+                                          runMutation({"id": user["id"]});
+                                          Navigator.pushAndRemoveUntil(
+                                            context, 
+                                            MaterialPageRoute(builder: (context){
+                                              return const HomeScreen();
+                                            },
+                                           ), (route) => false,
+                                         );
                                         },
                                        );
                                       }

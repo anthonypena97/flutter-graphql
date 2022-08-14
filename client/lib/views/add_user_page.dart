@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graphql/views/home_screen.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class AddUserPage extends StatefulWidget {
@@ -375,8 +376,11 @@ class _AddUserPageState extends State<AddUserPage> {
                   backgroundColor: MaterialStateProperty.all(Colors.red[100]),
                 ),
                 onPressed: () {
-                  // final route = MaterialPageRoute(builder: (context) => const UsersPage());
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(
+                    builder: (context){
+                      return const HomeScreen();
+                    }), (route) => false);
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 36.0, vertical: 12.0,),
