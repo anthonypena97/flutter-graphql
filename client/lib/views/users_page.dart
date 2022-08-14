@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_graphql/views/update_user_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import 'home_screen.dart';
+
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
   
@@ -92,14 +94,30 @@ class _UsersPageState extends State<UsersPage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8),
-                                  child: InkWell(
-                                    child: const Icon(
-                                      Icons.delete_forever,
-                                      color: Colors.redAccent,
+                                  child: Mutation(
+                                    options: MutationOptions(
+                                      document: gql(removeUser()),
+                                      onCompleted: (data){
+                                        
+                                      },
                                     ),
-                                    onTap: () async {
-                                        debugPrint('delete');
-                                    },
+                                    builder: (runMutation, result){
+                                      return  InkWell(
+                                        child: const Icon(
+                                        Icons.delete_forever,
+                                        color: Colors.redAccent,
+                                       ),
+                                        onTap: () async {
+                                          runMutation({"id": user["id"]});
+                                          Navigator.pushAndRemoveUntil(
+                                            context, 
+                                            MaterialPageRoute(builder: (context){
+                                              return const HomeScreen();
+                                            },
+                                            ), (route) => false);
+                                        },
+                                       );
+                                      }
                                   ),
                                 ),
                               ],
@@ -140,5 +158,15 @@ class _UsersPageState extends State<UsersPage> {
         
       },
     );
+  }
+  
+  String removeUser() {
+    return """
+    mutation RemoveUser(\$id: String!){
+      RemoveUser(id: \$id){
+        name
+      }
+    }
+    """;
   }
 }
