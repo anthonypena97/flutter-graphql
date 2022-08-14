@@ -38,6 +38,9 @@ class _UsersPageState extends State<UsersPage> {
   }
   """;
   
+  List hobbiesIDsToDelete = [];
+  List postsIDsToDelete = [];
+  
   @override
   Widget build(BuildContext context) {
     return Query(
@@ -122,14 +125,24 @@ class _UsersPageState extends State<UsersPage> {
                                         color: Colors.redAccent,
                                        ),
                                         onTap: () async {
-                                          runMutation({"id": user["id"]});
-                                          Navigator.pushAndRemoveUntil(
-                                            context, 
-                                            MaterialPageRoute(builder: (context){
-                                              return const HomeScreen();
-                                            },
-                                           ), (route) => false,
-                                         );
+                                          hobbiesIDsToDelete.clear();
+                                          postsIDsToDelete.clear();
+                                          for (var i = 0; i < user["hobbies"].length; i++){
+                                            hobbiesIDsToDelete.add(user["hobbies"][i]["id"]);
+                                          }
+                                          for (var i = 0; i < user["posts"].length; i++){
+                                            postsIDsToDelete.add(user["hobbies"][i]["id"]);
+                                          }
+                                          debugPrint("+++${user["name"]} Hobbies to delete ${hobbiesIDsToDelete.toString()}");
+                                          debugPrint("+++${user["name"]} Posts to delete ${postsIDsToDelete.toString()}");
+                                          
+                                          // runMutation({"id": user["id"]});
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context, 
+                                          //   MaterialPageRoute(builder: (context){
+                                          //     return const HomeScreen();
+                                          //   },
+                                          //  ), (route) => false,);
                                         },
                                        );
                                       }
