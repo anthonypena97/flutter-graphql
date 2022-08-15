@@ -134,10 +134,10 @@ class _UsersPageState extends State<UsersPage> {
                                             hobbiesIDsToDelete.add(user["hobbies"][i]["id"]);
                                           }
                                           for (var i = 0; i < user["posts"].length; i++){
-                                            postsIDsToDelete.add(user["hobbies"][i]["id"]);
+                                            postsIDsToDelete.add(user["posts"][i]["id"]);
                                           }
-                                          // debugPrint("+++${user["name"]} Hobbies to delete ${hobbiesIDsToDelete.toString()}");
-                                          // debugPrint("+++${user["name"]} Posts to delete ${postsIDsToDelete.toString()}");
+                                          debugPrint("+++${user["name"]} Hobbies to delete ${hobbiesIDsToDelete.toString()}");
+                                          debugPrint("+++${user["name"]} Posts to delete ${postsIDsToDelete.toString()}");
                                           
                                           setState((){
                                             _isRemoveHobbies = true;
@@ -164,7 +164,7 @@ class _UsersPageState extends State<UsersPage> {
                                   ),
                                   builder: (runMutation, result) {
                                     if(hobbiesIDsToDelete.isNotEmpty){
-                                      debugPrint("Calling deleteHobbies");
+                                      debugPrint("Calling removeHobbies");
                                       runMutation({
                                         'ids': hobbiesIDsToDelete
                                       });
@@ -180,6 +180,7 @@ class _UsersPageState extends State<UsersPage> {
                                   ),
                                   builder: (runMutation, result){
                                       if(postsIDsToDelete.isNotEmpty){
+                                        debugPrint("Calling removePosts");
                                         runMutation({
                                           "ids": postsIDsToDelete
                                         });
@@ -241,7 +242,6 @@ class _UsersPageState extends State<UsersPage> {
     return """
     mutation RemoveHobbies(\$ids: [String]){
       RemoveHobbies(ids: \$ids){
-        
       }
     }
     """;
@@ -251,7 +251,6 @@ class _UsersPageState extends State<UsersPage> {
     return """
     mutation RemovePosts(\$ids: [String]){
       RemovePosts(ids: \$ids){
-        
       }
     }
     """;
