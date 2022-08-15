@@ -252,6 +252,20 @@ const Mutation = new GraphQLObjectType({
       }
     },
     
+    RemovePosts:{
+      type: PostType,
+      args: {
+        ids: {type: GraphQLList(GraphQLString)},
+      },
+      resolve(parent, args){
+        let removedPosts = Post.deleteMany({_id: args.ids}).exec();
+        if(!removedPosts){
+          throw new "Error" ()
+        }
+        return removedPosts
+      }
+    },
+    
     createHobby: {
       type: HobbyType,
       args: {
@@ -302,6 +316,20 @@ const Mutation = new GraphQLObjectType({
           throw new "Error" ()
         }
         return removedHobby;
+      }
+    },
+    
+    RemoveHobbies:{
+      type: HobbyType,
+      args: {
+        ids: {type: GraphQLList(GraphQLString)},
+      },
+      resolve(parent, args){
+        let removedHobbies = Hobby.deleteMany({_id: args.ids}).exec();
+        if(!removedHobbies){
+          throw new "Error" ()
+        }
+        return removedHobbies
       }
     },
     

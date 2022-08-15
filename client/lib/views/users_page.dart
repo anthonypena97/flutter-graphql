@@ -41,6 +41,9 @@ class _UsersPageState extends State<UsersPage> {
   List hobbiesIDsToDelete = [];
   List postsIDsToDelete = [];
   
+  bool _isRemoveHobbies = false;
+  bool _isRemovePosts = false;
+  
   @override
   Widget build(BuildContext context) {
     return Query(
@@ -133,21 +136,57 @@ class _UsersPageState extends State<UsersPage> {
                                           for (var i = 0; i < user["posts"].length; i++){
                                             postsIDsToDelete.add(user["hobbies"][i]["id"]);
                                           }
-                                          debugPrint("+++${user["name"]} Hobbies to delete ${hobbiesIDsToDelete.toString()}");
-                                          debugPrint("+++${user["name"]} Posts to delete ${postsIDsToDelete.toString()}");
+                                          // debugPrint("+++${user["name"]} Hobbies to delete ${hobbiesIDsToDelete.toString()}");
+                                          // debugPrint("+++${user["name"]} Posts to delete ${postsIDsToDelete.toString()}");
                                           
-                                          // runMutation({"id": user["id"]});
-                                          // Navigator.pushAndRemoveUntil(
-                                          //   context, 
-                                          //   MaterialPageRoute(builder: (context){
-                                          //     return const HomeScreen();
-                                          //   },
-                                          //  ), (route) => false,);
+                                          setState((){
+                                            _isRemoveHobbies = true;
+                                            _isRemovePosts = true;
+                                          });
+                                          
+                                          runMutation({"id": user["id"]});
+                                          Navigator.pushAndRemoveUntil(
+                                            context, 
+                                            MaterialPageRoute(builder: (context){
+                                              return const HomeScreen();
+                                            },
+                                          ), (route) => false,);
                                         },
-                                       );
-                                      }
+                                      );
+                                    },
                                   ),
                                 ),
+                                _isRemoveHobbies
+                                ? Mutation(
+                                  options: MutationOptions(
+                                    document: gql(removeHobbies()),
+                                    onCompleted: (data) {},
+                                  ),
+                                  builder: (runMutation, result) {
+                                    if(hobbiesIDsToDelete.isNotEmpty){
+                                      debugPrint("Calling deleteHobbies");
+                                      runMutation({
+                                        'ids': hobbiesIDsToDelete
+                                      });
+                                    }
+                                    return Container();
+                                  },
+                                ) : Container(),
+                                _isRemovePosts
+                                ? Mutation(
+                                  options: MutationOptions(
+                                    document: gql(removePosts()),
+                                    onCompleted: (data){},
+                                  ),
+                                  builder: (runMutation, result){
+                                      if(postsIDsToDelete.isNotEmpty){
+                                        runMutation({
+                                          "ids": postsIDsToDelete
+                                        });
+                                      }
+                                      return Container();
+                                    },
+                                ) : Container(),
                               ],
                             )
                           ],
@@ -193,6 +232,26 @@ class _UsersPageState extends State<UsersPage> {
     mutation RemoveUser(\$id: String!){
       RemoveUser(id: \$id){
         name
+      }
+    }
+    """;
+  }
+  
+  String removeHobbies() {
+    return """
+    mutation RemoveHobbies(\$ids: [String]){
+      RemoveHobbies(ids: \$ids){
+        
+      }
+    }
+    """;
+  }
+  
+  String removePosts() {
+    return """
+    mutation RemovePosts(\$ids: [String]){
+      RemovePosts(ids: \$ids){
+        
       }
     }
     """;
