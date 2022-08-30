@@ -1,5 +1,5 @@
 {
-  "name": "flutter-graphql",
+  "name": "flutter_graphql",
   "version": "1.0.0",
   "description": "",
   "main": "server/app.js",

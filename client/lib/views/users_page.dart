@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graphql/views/details_page.dart';
+import 'package:flutter_graphql/views/update_user_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+
+import 'home_screen.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -13,17 +17,39 @@ class _UsersPageState extends State<UsersPage> {
   final String _query = """
   query{
     users{
+      id
       name
       profession
       age
+      posts{
+        id
+        comment
+        user{
+          id
+        }
+      }
+      hobbies{
+        id
+        title
+        description
+        user{
+          id
+        }
+      }
     }
   }
   """;
   
+  List hobbiesIDsToDelete = [];
+  List postsIDsToDelete = [];
+  
+  bool _isRemoveHobbies = false;
+  bool _isRemovePosts = false;
+  
   @override
   Widget build(BuildContext context) {
     return Query(
-      options: QueryOptions(document: gql(_query)),
+      options: QueryOptions(document: gql(_query),fetchPolicy: FetchPolicy.noCache),
       builder: (result, {fetchMore, refetch}) {
         if(result.isLoading){
           return const CircularProgressIndicator();
@@ -52,6 +78,15 @@ class _UsersPageState extends State<UsersPage> {
                 ),
                 padding: const EdgeInsets.all(20),
                 child: InkWell(
+                  onTap: () async{
+                     debugPrint(":::User${user.toString()}");
+                    final route = MaterialPageRoute(
+                     builder:(context) {
+                      return DetailsPage(user: user);
+                     }, 
+                    );
+                    await Navigator.push(context, route);
+                  },
                   // ignore: avoid_unnecessary_containers
                   child: Container(
                     child: Column(
@@ -76,21 +111,94 @@ class _UsersPageState extends State<UsersPage> {
                                     color: Colors.greenAccent,
                                   ),
                                   onTap: () async {
-                                      debugPrint('edit');
+                                    final route = MaterialPageRoute(builder: (context) {
+                                      return UpdateUser(
+                                        id: user["id"],
+                                        name: user["name"],
+                                        age: user["age"],
+                                        profession: user["profession"]
+                                      );
+                                    },
+                                   );
+                                   await Navigator.push(context, route);
                                   },
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8),
-                                  child: InkWell(
-                                    child: const Icon(
-                                      Icons.delete_forever,
-                                      color: Colors.redAccent,
+                                  child: Mutation(
+                                    options: MutationOptions(
+                                      document: gql(removeUser()),
+                                      onCompleted: (data){
+                                        
+                                      },
                                     ),
-                                    onTap: () async {
-                                        debugPrint('delete');
+                                    builder: (runMutation, result){
+                                      return  InkWell(
+                                        child: const Icon(
+                                        Icons.delete_forever,
+                                        color: Colors.redAccent,
+                                       ),
+                                        onTap: () async {
+                                          hobbiesIDsToDelete.clear();
+                                          postsIDsToDelete.clear();
+                                          for (var i = 0; i < user["hobbies"].length; i++){
+                                            hobbiesIDsToDelete.add(user["hobbies"][i]["id"]);
+                                          }
+                                          for (var i = 0; i < user["posts"].length; i++){
+                                            postsIDsToDelete.add(user["posts"][i]["id"]);
+                                          }
+                                          debugPrint("+++${user["name"]} Hobbies to delete ${hobbiesIDsToDelete.toString()}");
+                                          debugPrint("+++${user["name"]} Posts to delete ${postsIDsToDelete.toString()}");
+                                          
+                                          setState((){
+                                            _isRemoveHobbies = true;
+                                            _isRemovePosts = true;
+                                          });
+                                          
+                                          runMutation({"id": user["id"]});
+                                          Navigator.pushAndRemoveUntil(
+                                            context, 
+                                            MaterialPageRoute(builder: (context){
+                                              return const HomeScreen();
+                                            },
+                                          ), (route) => false,);
+                                        },
+                                      );
                                     },
                                   ),
                                 ),
+                                _isRemoveHobbies
+                                ? Mutation(
+                                  options: MutationOptions(
+                                    document: gql(removeHobbies()),
+                                    onCompleted: (data) {},
+                                  ),
+                                  builder: (runMutation, result) {
+                                    if(hobbiesIDsToDelete.isNotEmpty){
+                                      debugPrint("Calling removeHobbies");
+                                      runMutation({
+                                        'ids': hobbiesIDsToDelete
+                                      });
+                                    }
+                                    return Container();
+                                  },
+                                ) : Container(),
+                                _isRemovePosts // Waterfall Event
+                                ? Mutation(
+                                  options: MutationOptions(
+                                    document: gql(removePosts()),
+                                    onCompleted: (data){},
+                                  ),
+                                  builder: (runMutation, result){
+                                      if(postsIDsToDelete.isNotEmpty){
+                                        debugPrint("Calling removePosts");
+                                        runMutation({
+                                          "ids": postsIDsToDelete
+                                        });
+                                      }
+                                      return Container();
+                                    },
+                                ) : Container(),
                               ],
                             )
                           ],
@@ -129,5 +237,33 @@ class _UsersPageState extends State<UsersPage> {
         
       },
     );
+  }
+  
+  String removeUser() {
+    return """
+    mutation RemoveUser(\$id: String!){
+      RemoveUser(id: \$id){
+        name
+      }
+    }
+    """;
+  }
+  
+  String removeHobbies() {
+    return """
+    mutation RemoveHobbies(\$ids: [String]){
+      RemoveHobbies(ids: \$ids){
+      }
+    }
+    """;
+  }
+  
+  String removePosts() {
+    return """
+    mutation RemovePosts(\$ids: [String]){
+      RemovePosts(ids: \$ids){
+      }
+    }
+    """;
   }
 }
