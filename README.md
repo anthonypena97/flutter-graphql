@@ -5,7 +5,7 @@
 ![Mac OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
-![flutter_graphql](https://user-images.githubusercontent.com/79285555/187557333-03d73263-06ba-4822-b4c8-b42ca8bbb31e.gif)
+<img width="60" alt="GraphQl_Flutter" src="https://user-images.githubusercontent.com/79285555/187557333-03d73263-06ba-4822-b4c8-b42ca8bbb31e.gif">
 
 <hr>
 
