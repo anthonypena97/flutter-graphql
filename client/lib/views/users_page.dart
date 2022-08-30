@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graphql/views/details_page.dart';
 import 'package:flutter_graphql/views/update_user_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -30,6 +31,7 @@ class _UsersPageState extends State<UsersPage> {
       hobbies{
         id
         title
+        description
         user{
           id
         }
@@ -76,6 +78,15 @@ class _UsersPageState extends State<UsersPage> {
                 ),
                 padding: const EdgeInsets.all(20),
                 child: InkWell(
+                  onTap: () async{
+                     debugPrint(":::User${user.toString()}");
+                    final route = MaterialPageRoute(
+                     builder:(context) {
+                      return DetailsPage(user: user);
+                     }, 
+                    );
+                    await Navigator.push(context, route);
+                  },
                   // ignore: avoid_unnecessary_containers
                   child: Container(
                     child: Column(
@@ -172,7 +183,7 @@ class _UsersPageState extends State<UsersPage> {
                                     return Container();
                                   },
                                 ) : Container(),
-                                _isRemovePosts
+                                _isRemovePosts // Waterfall Event
                                 ? Mutation(
                                   options: MutationOptions(
                                     document: gql(removePosts()),
